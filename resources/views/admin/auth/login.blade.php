@@ -166,12 +166,6 @@
                     </svg>
                     <span>Sign In to Admin Panel</span>
                 </button>
-
-                <div class="demo-credential-box">
-                    <div class="fw-bold mb-1" style="color: var(--burgundy-900);">Default Access Credentials:</div>
-                    <div>Username: <code>admin</code> or <code>admin@admin.com</code></div>
-                    <div>Password: <code>admin123</code></div>
-                </div>
             </form>
         </div>
     </div>
