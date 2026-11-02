@@ -17,6 +17,7 @@ use App\Models\Channel;
 use App\Models\Package;
 use App\Models\PastProject;
 use App\Models\Promotion;
+use App\Models\Visitor;
 use Illuminate\Support\Facades\Route;
 
 // Visitor landing page
@@ -41,13 +42,22 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
         $totalProjects = PastProject::count();
         $recentPackages = Package::with(['channel', 'user'])->latest()->take(5)->get();
 
+        $visitorsToday = Visitor::where('date', '>=', now()->startOfDay())->count();
+        $visitorsThisWeek = Visitor::where('date', '>=', now()->startOfWeek())->count();
+        $visitorsThisMonth = Visitor::where('date', '>=', now()->startOfMonth())->count();
+        $totalVisitors = Visitor::count();
+
         return view('admin.dashboard', compact(
             'totalChannels',
             'totalBrands',
             'totalPackages',
             'totalPromotions',
             'totalProjects',
-            'recentPackages'
+            'recentPackages',
+            'visitorsToday',
+            'visitorsThisWeek',
+            'visitorsThisMonth',
+            'totalVisitors'
         ));
     })->name('dashboard');
 

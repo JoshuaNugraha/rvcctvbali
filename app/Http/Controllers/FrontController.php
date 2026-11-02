@@ -9,6 +9,7 @@ use App\Models\Package;
 use App\Models\PastProject;
 use App\Models\Promotion;
 use App\Models\Setting;
+use App\Models\Visitor;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -20,6 +21,8 @@ class FrontController extends Controller
      */
     public function index(Request $request): View
     {
+        Visitor::recordVisit($request);
+
         $requestedLang = strtolower((string) $request->query('lang', ''));
         if (in_array($requestedLang, ['en', 'id'], true)) {
             $request->session()->put('visitorLang', $requestedLang);

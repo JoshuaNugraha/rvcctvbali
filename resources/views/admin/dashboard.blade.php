@@ -4,38 +4,89 @@
 
 @section('content')
 <div class="d-flex flex-column gap-4">
-    <!-- Welcome Hero Card -->
-    <div class="welcome-card">
-        <div class="row align-items-center w-100 g-3">
-            <div class="col-12 col-md-8">
-                <div class="welcome-content">
-                    <h1 class="welcome-title">Welcome back, {{ auth()->user()->name }}!</h1>
-                    <p class="welcome-text">Overview of security systems, active camera packages, channel setups, and company marketing operations in Bali.</p>
-                    <div class="d-flex flex-wrap gap-2 pt-2">
-                        <a href="{{ route('admin.packages.index') }}" class="btn btn-primary">
-                            <svg viewBox="0 0 24 24">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
+    <!-- Welcome Hero Card with Visitor Analytics -->
+    <div class="welcome-card d-block">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+            <div>
+                <h1 class="welcome-title mb-1">Statistik Pengunjung Website</h1>
+            </div>
+            <div class="d-flex flex-wrap align-items-center gap-2">
+                <span class="badge py-2 px-3 rounded-pill text-white" style="background-color: var(--burgundy-900); font-size: 0.75rem; font-weight: 600;">
+                    Total: {{ number_format($totalVisitors) }}
+                </span>
+            </div>
+        </div>
+
+        <div class="row g-3">
+            <!-- Per Hari -->
+            <div class="col-12 col-md-4">
+                <div class="bg-white p-3 rounded-3 border h-100 shadow-sm" style="border-color: #F5CCD5 !important;">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--burgundy-700); letter-spacing: 0.04em;">Per Hari (Hari Ini)</span>
+                        <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #FFF5F7; color: var(--burgundy-900);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
                             </svg>
-                            Manage Packages
-                        </a>
-                        <a href="{{ route('admin.promotions.index') }}" class="btn btn-secondary">
-                            View Promotions
-                        </a>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-baseline gap-2">
+                        <span style="font-size: 2rem; font-weight: 800; color: #1E293B; line-height: 1;">{{ number_format($visitorsToday) }}</span>
+                        <span style="font-size: 0.825rem; font-weight: 600; color: #64748B;">Pengunjung</span>
+                    </div>
+                    <div class="mt-2 pt-2 border-top d-flex align-items-center justify-content-between" style="border-color: #F1F5F9 !important; font-size: 0.75rem; color: #64748B;">
+                        <span>Hari ini</span>
+                        <span class="fw-semibold text-dark">{{ now()->translatedFormat('d M Y') }}</span>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-4 text-md-end d-none d-md-block">
-                <div class="welcome-illustration">
-                    <svg width="120" height="110" viewBox="0 0 120 110" fill="none">
-                        <rect x="15" y="10" width="90" height="90" rx="14" fill="#FFFFFF" stroke="#F5CCD5" stroke-width="2"/>
-                        <circle cx="60" cy="55" r="24" stroke="#801B2E" stroke-width="3" fill="#FFF5F7"/>
-                        <circle cx="60" cy="55" r="10" fill="#801B2E"/>
-                        <line x1="60" y1="20" x2="60" y2="28" stroke="#801B2E" stroke-width="3" stroke-linecap="round"/>
-                        <line x1="60" y1="82" x2="60" y2="90" stroke="#801B2E" stroke-width="3" stroke-linecap="round"/>
-                        <line x1="25" y1="55" x2="33" y2="55" stroke="#801B2E" stroke-width="3" stroke-linecap="round"/>
-                        <line x1="87" y1="55" x2="95" y2="55" stroke="#801B2E" stroke-width="3" stroke-linecap="round"/>
-                    </svg>
+
+            <!-- Per Minggu -->
+            <div class="col-12 col-md-4">
+                <div class="bg-white p-3 rounded-3 border h-100 shadow-sm" style="border-color: #F5CCD5 !important;">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--burgundy-700); letter-spacing: 0.04em;">Per Minggu (Pekan Ini)</span>
+                        <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #FFF5F7; color: var(--burgundy-900);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-baseline gap-2">
+                        <span style="font-size: 2rem; font-weight: 800; color: #1E293B; line-height: 1;">{{ number_format($visitorsThisWeek) }}</span>
+                        <span style="font-size: 0.825rem; font-weight: 600; color: #64748B;">Pengunjung</span>
+                    </div>
+                    <div class="mt-2 pt-2 border-top d-flex align-items-center justify-content-between" style="border-color: #F1F5F9 !important; font-size: 0.75rem; color: #64748B;">
+                        <span>Pekan berjalan</span>
+                        <span class="fw-semibold text-dark">{{ now()->startOfWeek()->translatedFormat('d M') }} - {{ now()->endOfWeek()->translatedFormat('d M') }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Per Bulan -->
+            <div class="col-12 col-md-4">
+                <div class="bg-white p-3 rounded-3 border h-100 shadow-sm" style="border-color: #F5CCD5 !important;">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--burgundy-700); letter-spacing: 0.04em;">Per Bulan (Bulan Ini)</span>
+                        <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #FFF5F7; color: var(--burgundy-900);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-baseline gap-2">
+                        <span style="font-size: 2rem; font-weight: 800; color: #1E293B; line-height: 1;">{{ number_format($visitorsThisMonth) }}</span>
+                        <span style="font-size: 0.825rem; font-weight: 600; color: #64748B;">Pengunjung</span>
+                    </div>
+                    <div class="mt-2 pt-2 border-top d-flex align-items-center justify-content-between" style="border-color: #F1F5F9 !important; font-size: 0.75rem; color: #64748B;">
+                        <span>Bulan berjalan</span>
+                        <span class="fw-semibold text-dark">{{ now()->translatedFormat('F Y') }}</span>
+                    </div>
                 </div>
             </div>
         </div>
